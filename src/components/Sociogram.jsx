@@ -69,7 +69,7 @@ export default function Sociogram({ data }) {
       graph.d3ReheatSimulation();
       // Zoom to fit after layout is applied
       setTimeout(() => {
-        graph.zoomToFit(400, 50);
+        graph.zoomToFit(400, 120);
       }, 100);
     } else if (layoutMode === 'hierarchical') {
       const communities = new Map(nodes.map(n => [n.id, n.community]));
@@ -84,7 +84,7 @@ export default function Sociogram({ data }) {
       graph.d3ReheatSimulation();
       // Zoom to fit after layout is applied
       setTimeout(() => {
-        graph.zoomToFit(400, 50);
+        graph.zoomToFit(400, 120);
       }, 100);
     } else {
       // Force layout - unfix nodes
@@ -95,7 +95,7 @@ export default function Sociogram({ data }) {
       graph.d3ReheatSimulation();
       // Zoom to fit after layout is applied
       setTimeout(() => {
-        graph.zoomToFit(400, 50);
+        graph.zoomToFit(400, 120);
       }, 100);
     }
   }, [layoutMode, filteredData]);
@@ -108,6 +108,25 @@ export default function Sociogram({ data }) {
   // Handle node click
   const handleNodeClick = (node) => {
     setSelectedNode(node.id === selectedNode ? null : node.id);
+  };
+
+  // Zoom controls
+  const handleZoomIn = () => {
+    if (graphRef.current) {
+      graphRef.current.zoom(graphRef.current.zoom() * 1.2, 400);
+    }
+  };
+
+  const handleZoomOut = () => {
+    if (graphRef.current) {
+      graphRef.current.zoom(graphRef.current.zoom() / 1.2, 400);
+    }
+  };
+
+  const handleZoomReset = () => {
+    if (graphRef.current) {
+      graphRef.current.zoomToFit(400, 120);
+    }
   };
 
   // Get connected nodes
@@ -274,12 +293,34 @@ export default function Sociogram({ data }) {
           linkDirectionalParticles={0}
           linkDirectionalArrowLength={0}
           cooldownTicks={100}
-          onEngineStop={() => graphRef.current?.zoomToFit(400, 50)}
+          onEngineStop={() => graphRef.current?.zoomToFit(400, 120)}
           backgroundColor="#1a1a2e"
           enableNodeDrag={true}
           enableZoomInteraction={true}
           enablePanInteraction={true}
         />
+
+        {/* Zoom Controls */}
+        <div className="zoom-controls">
+          <button className="zoom-btn" onClick={handleZoomIn} title="Zoom In">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="M21 21l-4.35-4.35M11 8v6M8 11h6"></path>
+            </svg>
+          </button>
+          <button className="zoom-btn" onClick={handleZoomOut} title="Zoom Out">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="M21 21l-4.35-4.35M8 11h6"></path>
+            </svg>
+          </button>
+          <button className="zoom-btn" onClick={handleZoomReset} title="Reset Zoom">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M1 4v6h6M23 20v-6h-6"></path>
+              <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Legend */}
