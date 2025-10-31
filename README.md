@@ -58,6 +58,35 @@ npm run build
 
 The built files will be in the `dist` directory.
 
+### Deploy to Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone)
+
+**Option 1: Deploy via Vercel CLI**
+
+1. Install Vercel CLI:
+```bash
+npm i -g vercel
+```
+
+2. Deploy:
+```bash
+vercel
+```
+
+**Option 2: Deploy via Vercel Dashboard**
+
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com)
+3. Import your repository
+4. Vercel will auto-detect Vite and use the settings from `vercel.json`
+5. Click "Deploy"
+
+**Build Settings** (auto-configured via `vercel.json`):
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Install Command: `npm install`
+
 ## Usage Guide
 
 ### Navigation
