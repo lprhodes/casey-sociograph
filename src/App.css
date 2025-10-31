@@ -459,3 +459,120 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Print styles */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0.5cm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    overflow: visible !important;
+  }
+
+  .App {
+    height: auto !important;
+    padding: 0 !important;
+  }
+
+  /* Header - simplify for print */
+  .app-header {
+    background: none !important;
+    border: none !important;
+    backdrop-filter: none !important;
+    padding: 0.5rem 0 !important;
+    margin-bottom: 0.5rem !important;
+    page-break-after: avoid;
+  }
+
+  .header-content {
+    justify-content: center !important;
+  }
+
+  .app-header h1 {
+    color: black !important;
+    -webkit-text-fill-color: black !important;
+    background: none !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .app-header p {
+    color: #333 !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Hide interactive elements */
+  .settings-btn,
+  .controls,
+  .zoom-controls,
+  .info-panel,
+  .legend-hint {
+    display: none !important;
+  }
+
+  /* Sociogram container */
+  .sociogram-container {
+    gap: 0.5rem !important;
+    page-break-inside: avoid;
+  }
+
+  /* Graph wrapper */
+  .graph-wrapper {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    border-radius: 0 !important;
+    height: 18cm !important;
+    page-break-inside: avoid;
+    overflow: visible !important;
+  }
+
+  /* Legend - simplify for print */
+  .legend {
+    background: none !important;
+    border: 1px solid #ccc !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+    padding: 0.5rem !important;
+    font-size: 0.7rem !important;
+    gap: 1rem !important;
+    page-break-inside: avoid;
+    page-break-before: avoid;
+  }
+
+  .legend-item {
+    color: black !important;
+  }
+
+  .legend-color-box {
+    border: 1px solid #333 !important;
+  }
+
+  .legend-line.mutual {
+    background: #666 !important;
+    border: 1px solid #333 !important;
+  }
+
+  .legend-line.directed {
+    background: #999 !important;
+    border: 1px solid #333 !important;
+  }
+
+  .legend-line.directed::after {
+    color: #333 !important;
+  }
+
+  /* Ensure proper spacing */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Force black text for readability */
+  span, p, h1, h2, h3, div {
+    color: black !important;
+  }
+}
