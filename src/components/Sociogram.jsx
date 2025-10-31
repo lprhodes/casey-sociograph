@@ -67,6 +67,10 @@ export default function Sociogram({ data }) {
         }
       });
       graph.d3ReheatSimulation();
+      // Zoom to fit after layout is applied
+      setTimeout(() => {
+        graph.zoomToFit(400, 50);
+      }, 100);
     } else if (layoutMode === 'hierarchical') {
       const communities = new Map(nodes.map(n => [n.id, n.community]));
       const positions = calculateHierarchicalLayout(nodes, filteredData.links, communities, 800, 800);
@@ -78,6 +82,10 @@ export default function Sociogram({ data }) {
         }
       });
       graph.d3ReheatSimulation();
+      // Zoom to fit after layout is applied
+      setTimeout(() => {
+        graph.zoomToFit(400, 50);
+      }, 100);
     } else {
       // Force layout - unfix nodes
       nodes.forEach(node => {
@@ -85,6 +93,10 @@ export default function Sociogram({ data }) {
         node.fy = undefined;
       });
       graph.d3ReheatSimulation();
+      // Zoom to fit after layout is applied
+      setTimeout(() => {
+        graph.zoomToFit(400, 50);
+      }, 100);
     }
   }, [layoutMode, filteredData]);
 
